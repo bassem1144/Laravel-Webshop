@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homepagecontroller;
+use App\Http\Controllers\adminpagecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [homepagecontroller::class, 'index']);
+
+Route::get('/admin', [adminpagecontroller::class, 'index']);

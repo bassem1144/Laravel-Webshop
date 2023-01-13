@@ -21,7 +21,7 @@
             <a class="nav-item nav-link active" href="#">Home</a>
             <a class="nav-item nav-link" href="#">button 1</a>
             <a class="nav-item nav-link" href="#">button 2</a>
-            <a class="nav-item nav-link" href="#">button 3</a>
+            <a class="nav-item nav-link" href="/admin">Admin Page</a>
             
           </div>
         </div>
@@ -30,7 +30,7 @@
     <div class="card-deck row ">
 
         @foreach ($products as $product)
-            <div class="card  m-3 col-2">
+            <div class="card  m-3 col-2 h-100">
                 <img class="card-img-top" src="https://picsum.photos/200/150" alt="product image">
                 <div class="card-body">
                     <h5 class="card-title">{{ $product['name'] }}</h5>

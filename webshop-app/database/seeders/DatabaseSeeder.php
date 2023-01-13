@@ -35,6 +35,24 @@ class DatabaseSeeder extends Seeder
             'description' => 'This is product 3'
         ]);
 
+        products::create([
+            'name' => 'Product 4',
+            'price' => 400,
+            'description' => 'This is product 4'
+        ]);
+
+        products::create([
+            'name' => 'Product 5',
+            'price' => 500,
+            'description' => 'This is product 5'
+        ]);
+
+        products::create([
+            'name' => 'Product 6',
+            'price' => 600,
+            'description' => 'This is product 6'
+        ]);
+
 
     }
 }
