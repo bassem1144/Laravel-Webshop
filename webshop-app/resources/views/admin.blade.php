@@ -14,8 +14,14 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ $product['name'] }}</h4>
                     <p class="card-text">{{ $product['description'] }}</p>
+                    <div class="row">
                     <a href="/edit/{{ $product['id'] }}" class="btn btn-primary">Edit</a>
-                    <a href="/delete/{{ $product['id'] }}" class="btn btn-danger">Delete</a>
+                    <form action="/delete/{{ $product['id'] }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
                 </div>
             </div>
         @endforeach

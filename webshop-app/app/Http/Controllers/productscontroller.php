@@ -26,4 +26,9 @@ class productscontroller extends Controller
 
         return redirect('/admin');
     }
+    public function destroy(products $id)
+    {
+        $id->delete();
+        return redirect('/admin');
+    }
 }

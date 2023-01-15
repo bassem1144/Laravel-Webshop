@@ -26,4 +26,6 @@ Route::get('/admin', [adminpagecontroller::class, 'index']);
 
 Route::get('/edit/{id}', [productscontroller::class, 'edit']);
 
-route::put('/update/{id}', [productscontroller::class, 'update']);
+Route::put('/update/{id}', [productscontroller::class, 'update']);
+
+Route::delete('/delete/{id}', [productscontroller::class, 'destroy']);
