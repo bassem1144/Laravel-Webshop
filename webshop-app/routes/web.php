@@ -20,16 +20,23 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
+// Shows home page
 Route::get('/home', [homepagecontroller::class, 'index']);
 
+// Shows admin page
 Route::get('/admin', [adminpagecontroller::class, 'index']);
 
+// Shows create page
 Route::get('/create', [productscontroller::class, 'create']);
 
+// Stores data from create page
 Route::post('/store', [productscontroller::class, 'store']);
 
+// Shows edit page
 Route::get('/edit/{id}', [productscontroller::class, 'edit']);
 
+// Updates data from edit page
 Route::put('/update/{id}', [productscontroller::class, 'update']);
 
+// Deletes data
 Route::delete('/delete/{id}', [productscontroller::class, 'destroy']);
