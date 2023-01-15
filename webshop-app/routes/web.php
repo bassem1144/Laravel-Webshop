@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homepagecontroller;
 use App\Http\Controllers\adminpagecontroller;
+use App\Http\Controllers\productscontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::get('/', function () {
 Route::get('/home', [homepagecontroller::class, 'index']);
 
 Route::get('/admin', [adminpagecontroller::class, 'index']);
+
+Route::get('/edit/{id}', [productscontroller::class, 'edit']);
+
+route::put('/update/{id}', [productscontroller::class, 'update']);
