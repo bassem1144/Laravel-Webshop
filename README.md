@@ -2,13 +2,13 @@
 My first laravel project
 
 ## Features
-==Project still under development==
+**Project still under development**
 
 Database :white_check_mark:
-CRUD :white_check_mark:
-Login :soon:
-Register :soon:
-Shopping Cart :soon:
+CRUD :white_check_mark:  
+Login :soon:  
+Register :soon:  
+Shopping Cart :soon:  
 
 ## Installation
 - Clone the repository
