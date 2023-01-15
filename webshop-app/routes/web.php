@@ -24,6 +24,10 @@ Route::get('/home', [homepagecontroller::class, 'index']);
 
 Route::get('/admin', [adminpagecontroller::class, 'index']);
 
+Route::get('/create', [productscontroller::class, 'create']);
+
+Route::post('/store', [productscontroller::class, 'store']);
+
 Route::get('/edit/{id}', [productscontroller::class, 'edit']);
 
 Route::put('/update/{id}', [productscontroller::class, 'update']);

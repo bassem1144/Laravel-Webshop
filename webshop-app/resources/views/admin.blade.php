@@ -7,6 +7,8 @@
 
 
 <body>
+    <h1>Admin Page</h1>
+    <a href="/create" class="btn btn-primary">Create</a>
     <div class="card-deck row ">
         @foreach ($products as $product)
             <div class="card" style="width:400px">

@@ -8,11 +8,28 @@ use Illuminate\Http\Request;
 class productscontroller extends Controller
 {
 
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Request $request)
+    {
+        $formfields = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required'
+        ]);
+
+        products::create($formfields);
+
+        return redirect('/admin');
+    }
+    
     public function edit(products $id)
     {
         return view('edit', ['product' => $id]);
     }
-
 
     public function update(Request $request, products $id)
     {
@@ -31,4 +48,6 @@ class productscontroller extends Controller
         $id->delete();
         return redirect('/admin');
     }
+
+
 }
