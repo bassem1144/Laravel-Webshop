@@ -23,7 +23,7 @@ class productscontroller extends Controller
 
         products::create($formfields);
 
-        return redirect('/admin');
+        return redirect('/admin')->with('success', 'Product created successfully.');
     }
     
     public function edit(products $id)
@@ -41,12 +41,12 @@ class productscontroller extends Controller
 
         $id->update($formfields);
 
-        return redirect('/admin');
+        return redirect('/admin')->with('success', 'Product updated successfully.');
     }
     public function destroy(products $id)
     {
         $id->delete();
-        return redirect('/admin');
+        return redirect('/admin')->with('success', "{$id['name']} deleted successfully.");
     }
 
 
