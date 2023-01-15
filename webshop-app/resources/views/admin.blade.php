@@ -7,6 +7,7 @@
 
 
 <body>
+    <x-navbar />
     <h1>Admin Page</h1>
     <a href="/create" class="btn btn-primary">Create</a>
     <x-flash-message />

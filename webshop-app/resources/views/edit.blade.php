@@ -4,6 +4,7 @@
 <x-header></x-header>
     <title>Edit</title>
 <body>
+    <x-navbar />
     <h1>Edit: {{ $product['name'] }}</h1>
 
     <form  method="POST" action="/update/{{$product['id']}}">

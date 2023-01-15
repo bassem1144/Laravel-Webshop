@@ -5,6 +5,7 @@
 <title>Create</title>
 
 <body>
+    <x-navbar />
     <h1>Create product</h1>
 
     <form method="POST" action="/store">
