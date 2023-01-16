@@ -4,7 +4,7 @@ My first laravel project
 ## Features
 **Project still under development**
 
-Database :white_check_mark:
+Database :white_check_mark:  
 CRUD :white_check_mark:  
 Login :soon:  
 Register :soon:  
