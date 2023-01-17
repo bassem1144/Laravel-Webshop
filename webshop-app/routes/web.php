@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\logincontroller;
 use App\Http\Controllers\homepagecontroller;
-use App\Http\Controllers\adminpagecontroller;
 use App\Http\Controllers\productscontroller;
+use App\Http\Controllers\adminpagecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,7 @@ Route::put('/update/{id}', [productscontroller::class, 'update']);
 
 // Deletes data
 Route::delete('/delete/{id}', [productscontroller::class, 'destroy']);
+
+Route::get('login', [logincontroller::class, 'login']);
+
+Route::post('login', [logincontroller::class, 'checklogin']);

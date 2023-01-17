@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\user;
 use App\Models\products;
 use Illuminate\Database\Seeder;
 
@@ -53,6 +54,10 @@ class DatabaseSeeder extends Seeder
             'description' => 'This is product 6'
         ]);
 
-
+        user::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => 'admin'
+        ]);
     }
 }
