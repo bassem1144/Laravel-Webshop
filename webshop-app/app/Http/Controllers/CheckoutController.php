@@ -56,7 +56,7 @@ class CheckoutController extends Controller
         }
 
         $cart = $this->cartService->getCart();
-        
+
         // Check stock availability
         foreach ($cart as $item) {
             $product = Product::find($item['id']);
@@ -82,7 +82,7 @@ class CheckoutController extends Controller
             // Create order items and reduce stock
             foreach ($cart as $item) {
                 $product = Product::find($item['id']);
-                
+
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,

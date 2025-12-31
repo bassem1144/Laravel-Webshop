@@ -26,6 +26,11 @@ class HomeController extends Controller
      */
     public function show(Product $product)
     {
+        // Check if product exists (should be handled by route model binding)
+        if (!$product || !$product->exists) {
+            abort(404, 'Product not found');
+        }
+
         return view('products.show', compact('product'));
     }
 }
