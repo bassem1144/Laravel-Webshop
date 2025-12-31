@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -11,10 +12,28 @@ class HomeController extends Controller
     /**
      * Display the homepage with all products
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $products = Product::paginate(12);
-        return view('home', compact('products'));
+        $query = Product::with('category');
+
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        // Search by name or description
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        $products = $query->paginate(12)->withQueryString();
+        $categories = Category::all();
+
+        return view('home', compact('products', 'categories'));
     }
 
     /**
@@ -22,10 +41,7 @@ class HomeController extends Controller
      */
     public function show(Product $product): View
     {
-        // Check if product exists (should be handled by route model binding)
-        if (!$product || !$product->exists) {
-            abort(404, 'Product not found');
-        }
+        $product->load('category');
 
         return view('products.show', compact('product'));
     }
