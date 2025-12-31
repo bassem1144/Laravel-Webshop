@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\user;
-use App\Models\products;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,46 +19,62 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        products::create([
-            'name' => 'Product 1',
-            'price' => 100,
-            'description' => 'This is product 1'
+        Product::create([
+            'name' => 'Laptop HP EliteBook',
+            'price' => 89900,
+            'description' => 'Professional laptop with Intel i7, 16GB RAM, 512GB SSD',
+            'stock' => 15
         ]);
 
-        products::create([
-            'name' => 'Product 2',
-            'price' => 200,
-            'description' => 'This is product 2'
+        Product::create([
+            'name' => 'Wireless Mouse Logitech',
+            'price' => 2900,
+            'description' => 'Ergonomic wireless mouse with USB receiver',
+            'stock' => 50
         ]);
 
-        products::create([
-            'name' => 'Product 3',
-            'price' => 300,
-            'description' => 'This is product 3'
+        Product::create([
+            'name' => 'Mechanical Keyboard RGB',
+            'price' => 12900,
+            'description' => 'Gaming mechanical keyboard with RGB lighting',
+            'stock' => 30
         ]);
 
-        products::create([
-            'name' => 'Product 4',
-            'price' => 400,
-            'description' => 'This is product 4'
+        Product::create([
+            'name' => 'Monitor 27" 4K',
+            'price' => 34900,
+            'description' => 'Ultra HD 4K monitor with HDR support',
+            'stock' => 20
         ]);
 
-        products::create([
-            'name' => 'Product 5',
-            'price' => 500,
-            'description' => 'This is product 5'
+        Product::create([
+            'name' => 'USB-C Hub',
+            'price' => 4900,
+            'description' => 'Multi-port USB-C hub with HDMI and card reader',
+            'stock' => 100
         ]);
 
-        products::create([
-            'name' => 'Product 6',
-            'price' => 600,
-            'description' => 'This is product 6'
+        Product::create([
+            'name' => 'Webcam 1080p',
+            'price' => 7900,
+            'description' => 'Full HD webcam with auto-focus and built-in mic',
+            'stock' => 45
         ]);
 
-        user::create([
+        // Create admin user
+        User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => 'admin'
+            'email' => 'admin@webshop.com',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin'
+        ]);
+
+        // Create regular customer
+        User::create([
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'customer'
         ]);
     }
 }
