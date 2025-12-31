@@ -12,8 +12,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse ($products as $product)
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow">
-                                <img class="w-full h-48 object-cover" 
-                                     src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/400x300?text=No+Image' }}" 
+                                <img class="w-full h-48 object-cover"
+                                     src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/400x300?text=No+Image' }}"
                                      alt="{{ $product->name }}">
                                 <div class="p-4">
                                     <h5 class="text-xl font-bold mb-2">{{ $product->name }}</h5>
@@ -22,7 +22,7 @@
                                         <span class="text-2xl font-bold text-indigo-600">{{ $product->formatted_price }}</span>
                                         <span class="text-sm text-gray-500">Stock: {{ $product->stock }}</span>
                                     </div>
-                                    <a href="{{ route('products.show', $product) }}" 
+                                    <a href="{{ route('products.show', $product) }}"
                                        class="mt-4 w-full inline-block text-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition">
                                         View Details
                                     </a>

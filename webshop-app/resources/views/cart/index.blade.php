@@ -36,10 +36,10 @@
                         <div class="space-y-4">
                             @foreach($cart as $item)
                                 <div class="flex items-center border-b pb-4">
-                                    <img src="{{ $item['image'] ? asset('storage/' . $item['image']) : 'https://via.placeholder.com/100' }}" 
-                                         alt="{{ $item['name'] }}" 
+                                    <img src="{{ $item['image'] ? asset('storage/' . $item['image']) : 'https://via.placeholder.com/100' }}"
+                                         alt="{{ $item['name'] }}"
                                          class="w-20 h-20 object-cover rounded">
-                                    
+
                                     <div class="ml-4 flex-1">
                                         <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
                                         <p class="text-gray-600">€{{ number_format($item['price'] / 100, 2) }}</p>
@@ -49,10 +49,10 @@
                                         <form action="{{ route('cart.update', $item['id']) }}" method="POST" class="flex items-center">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="number" 
-                                                   name="quantity" 
-                                                   value="{{ $item['quantity'] }}" 
-                                                   min="1" 
+                                            <input type="number"
+                                                   name="quantity"
+                                                   value="{{ $item['quantity'] }}"
+                                                   min="1"
                                                    class="w-20 px-3 py-2 border rounded"
                                                    onchange="this.form.submit()">
                                         </form>

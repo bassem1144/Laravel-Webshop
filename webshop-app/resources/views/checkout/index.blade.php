@@ -18,15 +18,15 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <h3 class="text-lg font-semibold mb-4">Shipping Information</h3>
-                        
+
                         <form action="{{ route('checkout.store') }}" method="POST">
                             @csrf
 
                             <div class="mb-4">
                                 <label for="shipping_address" class="block text-sm font-medium text-gray-700">Shipping Address</label>
-                                <textarea name="shipping_address" 
-                                          id="shipping_address" 
-                                          rows="4" 
+                                <textarea name="shipping_address"
+                                          id="shipping_address"
+                                          rows="4"
                                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                           required>{{ old('shipping_address') }}</textarea>
                                 @error('shipping_address')
@@ -36,8 +36,8 @@
 
                             <div class="mb-4">
                                 <label for="payment_method" class="block text-sm font-medium text-gray-700">Payment Method</label>
-                                <select name="payment_method" 
-                                        id="payment_method" 
+                                <select name="payment_method"
+                                        id="payment_method"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         required>
                                     <option value="">Select payment method</option>
@@ -52,9 +52,9 @@
 
                             <div class="mb-4">
                                 <label for="notes" class="block text-sm font-medium text-gray-700">Order Notes (Optional)</label>
-                                <textarea name="notes" 
-                                          id="notes" 
-                                          rows="3" 
+                                <textarea name="notes"
+                                          id="notes"
+                                          rows="3"
                                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                           placeholder="Any special instructions?">{{ old('notes') }}</textarea>
                                 @error('notes')
@@ -73,7 +73,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <h3 class="text-lg font-semibold mb-4">Order Summary</h3>
-                        
+
                         <div class="space-y-3">
                             @foreach($cart as $item)
                                 <div class="flex justify-between">

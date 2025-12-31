@@ -12,15 +12,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Product Image -->
                         <div>
-                            <img class="w-full rounded-lg shadow-lg" 
-                                 src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/600x400?text=No+Image' }}" 
+                            <img class="w-full rounded-lg shadow-lg"
+                                 src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/600x400?text=No+Image' }}"
                                  alt="{{ $product->name }}">
                         </div>
 
                         <!-- Product Details -->
                         <div>
                             <h1 class="text-3xl font-bold mb-4">{{ $product->name }}</h1>
-                            
+
                             <div class="mb-6">
                                 <span class="text-4xl font-bold text-indigo-600">{{ $product->formatted_price }}</span>
                             </div>
@@ -57,8 +57,8 @@
                                         Out of Stock
                                     </button>
                                 @endif
-                                
-                                <a href="{{ route('home') }}" 
+
+                                <a href="{{ route('home') }}"
                                    class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition">
                                     Back to Products
                                 </a>
