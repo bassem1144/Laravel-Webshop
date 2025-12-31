@@ -16,15 +16,23 @@ class OrderItem extends Model
         'price',
     ];
 
-    protected $casts = [
-        'quantity' => 'integer',
-        'price' => 'integer',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'quantity' => 'integer',
+            'price' => 'integer',
+        ];
+    }
 
     /**
      * Get the order that owns the item
      */
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
@@ -32,7 +40,7 @@ class OrderItem extends Model
     /**
      * Get the product for this order item
      */
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

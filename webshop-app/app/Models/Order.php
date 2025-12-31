@@ -19,14 +19,22 @@ class Order extends Model
         'notes',
     ];
 
-    protected $casts = [
-        'total' => 'integer',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'total' => 'integer',
+        ];
+    }
 
     /**
      * Get the user that owns the order
      */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -34,7 +42,7 @@ class Order extends Model
     /**
      * Get the order items for the order
      */
-    public function items()
+    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(OrderItem::class);
     }

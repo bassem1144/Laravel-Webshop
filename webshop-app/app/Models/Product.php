@@ -11,10 +11,18 @@ class Product extends Model
 
     protected $fillable = ['name', 'price', 'description', 'stock', 'image'];
 
-    protected $casts = [
-        'price' => 'integer',
-        'stock' => 'integer',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'price' => 'integer',
+            'stock' => 'integer',
+        ];
+    }
 
     /**
      * Get the formatted price
