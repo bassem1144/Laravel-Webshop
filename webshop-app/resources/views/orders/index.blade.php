@@ -45,7 +45,13 @@
                                         <div class="space-y-1">
                                             @foreach($order->items as $item)
                                                 <div class="flex justify-between text-sm">
-                                                    <span>{{ $item->product->name }} (x{{ $item->quantity }})</span>
+                                                    <span>
+                                                        @if($item->product)
+                                                            {{ $item->product->name }} (x{{ $item->quantity }})
+                                                        @else
+                                                            <span class="text-gray-500">[Product Deleted]</span> (x{{ $item->quantity }})
+                                                        @endif
+                                                    </span>
                                                     <span>{{ $item->formatted_subtotal }}</span>
                                                 </div>
                                             @endforeach

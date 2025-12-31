@@ -26,7 +26,7 @@
                             <h3 class="text-lg font-semibold mb-2">Order Information</h3>
                             <p class="text-sm text-gray-600">Order ID: <span class="font-medium">#{{ $order->id }}</span></p>
                             <p class="text-sm text-gray-600">Date: <span class="font-medium">{{ $order->created_at->format('F d, Y H:i') }}</span></p>
-                            <p class="text-sm text-gray-600">Status: 
+                            <p class="text-sm text-gray-600">Status:
                                 <span class="px-2 py-1 rounded-full text-xs font-medium
                                     {{ $order->status === 'completed' ? 'bg-green-100 text-green-800' : '' }}
                                     {{ $order->status === 'processing' ? 'bg-blue-100 text-blue-800' : '' }}
@@ -35,7 +35,7 @@
                                     {{ ucfirst($order->status) }}
                                 </span>
                             </p>
-                            <p class="text-sm text-gray-600">Payment Status: 
+                            <p class="text-sm text-gray-600">Payment Status:
                                 <span class="px-2 py-1 rounded-full text-xs font-medium
                                     {{ $order->payment_status === 'paid' ? 'bg-green-100 text-green-800' : '' }}
                                     {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
@@ -48,9 +48,13 @@
 
                         <div>
                             <h3 class="text-lg font-semibold mb-2">Customer Information</h3>
-                            <p class="text-sm text-gray-600">Name: <span class="font-medium">{{ $order->user->name }}</span></p>
-                            <p class="text-sm text-gray-600">Email: <span class="font-medium">{{ $order->user->email }}</span></p>
-                            
+                            @if($order->user)
+                                <p class="text-sm text-gray-600">Name: <span class="font-medium">{{ $order->user->name }}</span></p>
+                                <p class="text-sm text-gray-600">Email: <span class="font-medium">{{ $order->user->email }}</span></p>
+                            @else
+                                <p class="text-sm text-gray-600 text-gray-500">[Customer information unavailable]</p>
+                            @endif
+
                             <h4 class="text-md font-semibold mt-4 mb-2">Shipping Address</h4>
                             <p class="text-sm text-gray-600 whitespace-pre-line">{{ $order->shipping_address }}</p>
                         </div>
@@ -79,10 +83,17 @@
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <img src="{{ $item->product->image ? asset('storage/' . $item->product->image) : 'https://via.placeholder.com/40' }}" 
-                                                     alt="{{ $item->product->name }}" 
-                                                     class="w-10 h-10 rounded object-cover mr-3">
-                                                <span class="font-medium">{{ $item->product->name }}</span>
+                                                @if($item->product)
+                                                    <img src="{{ $item->product->image ? asset('storage/' . $item->product->image) : 'https://via.placeholder.com/40' }}"
+                                                         alt="{{ $item->product->name }}"
+                                                         class="w-10 h-10 rounded object-cover mr-3">
+                                                    <span class="font-medium">{{ $item->product->name }}</span>
+                                                @else
+                                                    <img src="https://via.placeholder.com/40"
+                                                         alt="Deleted Product"
+                                                         class="w-10 h-10 rounded object-cover mr-3">
+                                                    <span class="font-medium text-gray-500">[Product Deleted]</span>
+                                                @endif
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
