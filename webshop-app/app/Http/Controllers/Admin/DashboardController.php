@@ -10,10 +10,8 @@ class DashboardController extends Controller
 {
     /**
      * Display admin dashboard
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): \Illuminate\View\View
     {
         $products = Product::latest()->paginate(15);
         return view('admin.dashboard', compact('products'));

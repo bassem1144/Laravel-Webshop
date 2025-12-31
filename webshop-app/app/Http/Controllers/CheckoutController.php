@@ -6,25 +6,21 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Services\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
-    protected $cartService;
-
-    public function __construct(CartService $cartService)
-    {
-        $this->middleware('auth');
-        $this->cartService = $cartService;
-    }
+    public function __construct(
+        protected CartService $cartService
+    ) {}
 
     /**
      * Show checkout form
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function index()
+    public function index(): View|RedirectResponse
     {
         if ($this->cartService->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
@@ -39,11 +35,8 @@ class CheckoutController extends Controller
 
     /**
      * Process checkout and create order
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'shipping_address' => 'required|string|max:500',
@@ -110,11 +103,8 @@ class CheckoutController extends Controller
 
     /**
      * Show payment simulation page
-     *
-     * @param Order $order
-     * @return \Illuminate\View\View
      */
-    public function payment(Order $order)
+    public function payment(Order $order): View
     {
         // Ensure user owns this order
         if ($order->user_id !== auth()->id()) {
@@ -126,12 +116,8 @@ class CheckoutController extends Controller
 
     /**
      * Process simulated payment
-     *
-     * @param Request $request
-     * @param Order $order
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function processPayment(Request $request, Order $order)
+    public function processPayment(Request $request, Order $order): RedirectResponse
     {
         // Ensure user owns this order
         if ($order->user_id !== auth()->id()) {

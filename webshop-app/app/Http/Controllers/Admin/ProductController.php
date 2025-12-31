@@ -4,27 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
     /**
      * Show the form for creating a new product
-     *
-     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.products.create');
     }
 
     /**
      * Store a newly created product in storage
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -49,23 +46,16 @@ class ProductController extends Controller
 
     /**
      * Show the form for editing the specified product
-     *
-     * @param Product $product
-     * @return \Illuminate\View\View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified product in storage
-     *
-     * @param Request $request
-     * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -90,11 +80,8 @@ class ProductController extends Controller
 
     /**
      * Remove the specified product from storage
-     *
-     * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $productName = $product->name;
         $product->delete();

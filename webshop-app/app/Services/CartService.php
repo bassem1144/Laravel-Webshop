@@ -9,8 +9,6 @@ class CartService
 {
     /**
      * Get cart items from session
-     *
-     * @return Collection
      */
     public function getCart(): Collection
     {
@@ -19,10 +17,6 @@ class CartService
 
     /**
      * Add product to cart
-     *
-     * @param Product $product
-     * @param int $quantity
-     * @return void
      */
     public function add(Product $product, int $quantity = 1): void
     {
@@ -46,10 +40,6 @@ class CartService
 
     /**
      * Update cart item quantity
-     *
-     * @param int $productId
-     * @param int $quantity
-     * @return void
      */
     public function update(int $productId, int $quantity): void
     {
@@ -67,9 +57,6 @@ class CartService
 
     /**
      * Remove product from cart
-     *
-     * @param int $productId
-     * @return void
      */
     public function remove(int $productId): void
     {
@@ -80,8 +67,6 @@ class CartService
 
     /**
      * Clear entire cart
-     *
-     * @return void
      */
     public function clear(): void
     {
@@ -90,8 +75,6 @@ class CartService
 
     /**
      * Get cart total
-     *
-     * @return int
      */
     public function getTotal(): int
     {
@@ -102,8 +85,6 @@ class CartService
 
     /**
      * Get formatted cart total
-     *
-     * @return string
      */
     public function getFormattedTotal(): string
     {
@@ -112,8 +93,6 @@ class CartService
 
     /**
      * Get cart item count
-     *
-     * @return int
      */
     public function getCount(): int
     {

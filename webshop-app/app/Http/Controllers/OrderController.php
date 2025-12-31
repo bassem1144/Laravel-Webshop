@@ -4,20 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display user's order history
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $orders = auth()->user()
             ->orders()
@@ -30,11 +25,8 @@ class OrderController extends Controller
 
     /**
      * Display a specific order
-     *
-     * @param Order $order
-     * @return \Illuminate\View\View
      */
-    public function show(Order $order)
+    public function show(Order $order): View
     {
         // Ensure user owns this order or is admin
         if ($order->user_id !== auth()->id() && !auth()->user()->isAdmin()) {

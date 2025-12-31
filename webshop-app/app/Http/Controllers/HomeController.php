@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     /**
      * Display the homepage with all products
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $products = Product::paginate(12);
         return view('home', compact('products'));
@@ -20,11 +19,8 @@ class HomeController extends Controller
 
     /**
      * Display a single product
-     *
-     * @param Product $product
-     * @return \Illuminate\View\View
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         // Check if product exists (should be handled by route model binding)
         if (!$product || !$product->exists) {

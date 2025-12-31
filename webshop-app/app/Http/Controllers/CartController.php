@@ -4,23 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Services\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    protected $cartService;
-
-    public function __construct(CartService $cartService)
-    {
-        $this->cartService = $cartService;
-    }
+    public function __construct(
+        protected CartService $cartService
+    ) {}
 
     /**
      * Display the shopping cart
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $cart = $this->cartService->getCart();
         $total = $this->cartService->getTotal();
@@ -31,12 +28,8 @@ class CartController extends Controller
 
     /**
      * Add product to cart
-     *
-     * @param Request $request
-     * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function add(Request $request, Product $product)
+    public function add(Request $request, Product $product): RedirectResponse
     {
         $quantity = $request->input('quantity', 1);
 
@@ -51,12 +44,8 @@ class CartController extends Controller
 
     /**
      * Update cart item quantity
-     *
-     * @param Request $request
-     * @param int $productId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $productId)
+    public function update(Request $request, int $productId): RedirectResponse
     {
         $quantity = $request->input('quantity', 1);
         $this->cartService->update($productId, $quantity);
@@ -66,11 +55,8 @@ class CartController extends Controller
 
     /**
      * Remove item from cart
-     *
-     * @param int $productId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(int $productId)
+    public function remove(int $productId): RedirectResponse
     {
         $this->cartService->remove($productId);
 
@@ -79,10 +65,8 @@ class CartController extends Controller
 
     /**
      * Clear entire cart
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function clear()
+    public function clear(): RedirectResponse
     {
         $this->cartService->clear();
 
