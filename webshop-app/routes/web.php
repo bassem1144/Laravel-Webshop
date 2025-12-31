@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\logincontroller;
-use App\Http\Controllers\homepagecontroller;
-use App\Http\Controllers\productscontroller;
-use App\Http\Controllers\adminpagecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,36 +15,60 @@ use App\Http\Controllers\adminpagecontroller;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
+// Public routes
 Route::get('/', function () {
-    return redirect('/home');
+    return redirect()->route('home');
 });
 
-// Shows home page
-Route::get('/home', [homepagecontroller::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/products/{product}', [HomeController::class, 'show'])->name('products.show');
 
-// Shows admin page
-Route::get('/admin', [adminpagecontroller::class, 'index']);
+// Cart routes (accessible to all)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('/cart/update/{productId}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
-// Shows create page
-Route::get('/create', [productscontroller::class, 'create']);
+// Authentication routes (provided by Breeze)
+require __DIR__.'/auth.php';
 
-// Stores data from create page
-Route::post('/store', [productscontroller::class, 'store']);
+// Authenticated user routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect()->route('home');
+    })->name('dashboard');
+    
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// Shows edit page
-Route::get('/edit/{id}', [productscontroller::class, 'edit']);
+    // Checkout routes
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/payment/{order}', [CheckoutController::class, 'payment'])->name('checkout.payment');
+    Route::post('/checkout/payment/{order}', [CheckoutController::class, 'processPayment'])->name('checkout.processPayment');
 
-// Updates data from edit page
-Route::put('/update/{id}', [productscontroller::class, 'update']);
+    // Order routes
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+});
 
-// Deletes data
-Route::delete('/delete/{id}', [productscontroller::class, 'destroy']);
+// Admin routes (protected by admin middleware)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Product management
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+});
 
-Route::get('login', [logincontroller::class, 'login']);
 
-Route::post('login', [logincontroller::class, 'checklogin']);
