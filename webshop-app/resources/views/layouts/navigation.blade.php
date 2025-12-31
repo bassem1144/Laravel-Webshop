@@ -47,13 +47,13 @@
                 </a>
             </div>
 
-            <!-- Settings Dropdown -->
+            <!-- Settings Dropdown (Auth) -->
             @auth
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -83,11 +83,16 @@
             </div>
             @endauth
 
+            <!-- Guest Login/Register -->
             @guest
-                <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-4">
-                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">{{ __('Login') }}</a>
-                    <a href="{{ route('register') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">{{ __('Register') }}</a>
-                </div>
+            <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-3">
+                <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 border-2 border-gray-800 text-sm font-semibold rounded-md text-gray-800 bg-white hover:bg-gray-100 transition">
+                    {{ __('Login') }}
+                </a>
+                <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border-2 border-gray-800 text-sm font-semibold rounded-md text-white bg-gray-800 hover:bg-gray-900 transition">
+                    {{ __('Register') }}
+                </a>
+            </div>
             @endguest
 
             <!-- Hamburger -->
@@ -105,18 +110,23 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('Products') }}
             </x-responsive-nav-link>
+            @auth
+                <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                    {{ __('My Orders') }}
+                </x-responsive-nav-link>
+            @endauth
         </div>
 
-        <!-- Responsive Settings Options -->
+        <!-- Responsive Settings Options (Auth) -->
         @auth
-            <div class="pt-4 pb-1 border-t border-gray-200">
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            </div>
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
@@ -136,5 +146,17 @@
             </div>
         </div>
         @endauth
+
+        <!-- Responsive Guest Options -->
+        @guest
+        <div class="pt-4 pb-3 border-t border-gray-200 space-y-1">
+            <x-responsive-nav-link :href="route('login')">
+                {{ __('Login') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')">
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+        </div>
+        @endguest
     </div>
 </nav>
