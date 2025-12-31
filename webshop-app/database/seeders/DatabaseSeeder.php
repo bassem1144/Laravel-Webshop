@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
+use App\Models\Category;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
@@ -13,52 +12,61 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
+        // Create categories
+        $computers = Category::create(['name' => 'Computers', 'description' => 'Laptops, desktops and workstations']);
+        $peripherals = Category::create(['name' => 'Peripherals', 'description' => 'Mice, keyboards and accessories']);
+        $displays = Category::create(['name' => 'Displays', 'description' => 'Monitors and screens']);
+        $accessories = Category::create(['name' => 'Accessories', 'description' => 'Cables, hubs and adapters']);
 
         Product::create([
             'name' => 'Laptop HP EliteBook',
             'price' => 89900,
             'description' => 'Professional laptop with Intel i7, 16GB RAM, 512GB SSD',
-            'stock' => 15
+            'stock' => 15,
+            'category_id' => $computers->id
         ]);
 
         Product::create([
             'name' => 'Wireless Mouse Logitech',
             'price' => 2900,
             'description' => 'Ergonomic wireless mouse with USB receiver',
-            'stock' => 50
+            'stock' => 50,
+            'category_id' => $peripherals->id
         ]);
 
         Product::create([
             'name' => 'Mechanical Keyboard RGB',
             'price' => 12900,
             'description' => 'Gaming mechanical keyboard with RGB lighting',
-            'stock' => 30
+            'stock' => 30,
+            'category_id' => $peripherals->id
         ]);
 
         Product::create([
             'name' => 'Monitor 27" 4K',
             'price' => 34900,
             'description' => 'Ultra HD 4K monitor with HDR support',
-            'stock' => 20
+            'stock' => 20,
+            'category_id' => $displays->id
         ]);
 
         Product::create([
             'name' => 'USB-C Hub',
             'price' => 4900,
             'description' => 'Multi-port USB-C hub with HDMI and card reader',
-            'stock' => 100
+            'stock' => 100,
+            'category_id' => $accessories->id
         ]);
 
         Product::create([
             'name' => 'Webcam 1080p',
             'price' => 7900,
             'description' => 'Full HD webcam with auto-focus and built-in mic',
-            'stock' => 45
+            'stock' => 45,
+            'category_id' => $accessories->id
         ]);
 
         // Create admin user
