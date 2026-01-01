@@ -76,8 +76,16 @@
 
                         <div class="space-y-3">
                             @foreach($cart as $item)
-                                <div class="flex justify-between">
-                                    <span class="text-gray-600">{{ $item['name'] }} (x{{ $item['quantity'] }})</span>
+                                <div class="flex justify-between items-center pb-3 border-b last:border-b-0">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="{{ $item['image'] ? asset('storage/' . $item['image']) : 'https://picsum.photos/80/80?random=' . $item['id'] }}"
+                                             alt="{{ $item['name'] }}"
+                                             class="w-16 h-16 object-cover rounded">
+                                        <div>
+                                            <span class="text-gray-800">{{ $item['name'] }} (x{{ $item['quantity'] }})</span>
+                                            <span class="block text-sm text-gray-500">€{{ number_format($item['price'] / 100, 2) }}</span>
+                                        </div>
+                                    </div>
                                     <span class="font-medium">€{{ number_format(($item['price'] * $item['quantity']) / 100, 2) }}</span>
                                 </div>
                             @endforeach

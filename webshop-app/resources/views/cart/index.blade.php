@@ -36,7 +36,7 @@
                         <div class="space-y-4">
                             @foreach($cart as $item)
                                 <div class="flex items-center border-b pb-4">
-                                    <img src="{{ $item['image'] ? asset('storage/' . $item['image']) : 'https://via.placeholder.com/100' }}"
+                                    <img src="{{ $item['image'] ? asset('storage/' . $item['image']) : 'https://picsum.photos/100/100?random=' . $item['id'] }}"
                                          alt="{{ $item['name'] }}"
                                          class="w-20 h-20 object-cover rounded">
 
