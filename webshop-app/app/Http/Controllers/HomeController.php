@@ -30,10 +30,34 @@ class HomeController extends Controller
             });
         }
 
-        $products = $query->paginate(12)->withQueryString();
-        $categories = Category::all();
+        // Filter by price range
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price * 100);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price * 100);
+        }
 
-        return view('home', compact('products', 'categories'));
+        // Sort products
+        $sort = $request->get('sort', 'name_asc');
+        match($sort) {
+            'price_asc' => $query->orderBy('price', 'asc'),
+            'price_desc' => $query->orderBy('price', 'desc'),
+            'name_desc' => $query->orderBy('name', 'desc'),
+            'newest' => $query->latest(),
+            default => $query->orderBy('name', 'asc'),
+        };
+
+        $products = $query->paginate(12)->withQueryString();
+        $categories = Category::withCount('products')->get();
+
+        // Get current category for breadcrumbs
+        $currentCategory = null;
+        if ($request->filled('category')) {
+            $currentCategory = Category::find($request->category);
+        }
+
+        return view('home', compact('products', 'categories', 'currentCategory'));
     }
 
     /**
