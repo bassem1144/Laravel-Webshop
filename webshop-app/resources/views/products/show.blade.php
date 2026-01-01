@@ -13,7 +13,7 @@
                         <!-- Product Image -->
                         <div>
                             <img class="w-full rounded-lg shadow-lg"
-                                 src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/600x400?text=No+Image' }}"
+                                 src="{{ $product->image_url }}"
                                  alt="{{ $product->name }}">
                         </div>
 

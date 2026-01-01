@@ -51,7 +51,7 @@
                         @forelse ($products as $product)
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow">
                                 <img class="w-full h-48 object-cover"
-                                     src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/400x300?text=No+Image' }}"
+                                     src="{{ $product->image_url }}"
                                      alt="{{ $product->name }}">
                                 <div class="p-4">
                                     @if($product->category)
