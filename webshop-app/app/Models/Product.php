@@ -34,6 +34,18 @@ class Product extends Model
     }
 
     /**
+     * Get the image URL (real image or placeholder)
+     */
+    public function getImageUrlAttribute(): string
+    {
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        // Generate consistent placeholder image based on product ID
+        return 'https://picsum.photos/400/300?random=' . $this->id;
+    }
+
+    /**
      * Get the category that owns the product
      */
     public function category(): BelongsTo
