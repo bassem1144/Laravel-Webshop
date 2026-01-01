@@ -38,7 +38,17 @@ class AIImageService
                     ]
                 ]);
 
+            if (!$response->successful()) {
+                \Log::error('Replicate API error: ' . $response->body());
+                return null;
+            }
+
             $predictionId = $response->json('id');
+
+            if (!$predictionId) {
+                \Log::error('No prediction ID returned from API');
+                return null;
+            }
 
             // Poll for completion
             return $this->waitForCompletion($predictionId);
