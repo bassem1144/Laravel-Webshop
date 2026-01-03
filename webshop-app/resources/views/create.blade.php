@@ -29,6 +29,25 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
+        <label for="stock">Stock</label><br><br>
+        <input type="number" name="stock" placeholder="Stock" value="{{ old('stock') }}"><br><br>
+        @error('stock')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        <label for="category_id">Category</label><br><br>
+        <select name="category_id" id="category_id">
+            <option value="">Select Category</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select><br><br>
+        @error('category_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <button type="submit">create</button>
 </body>
 

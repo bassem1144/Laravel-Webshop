@@ -21,6 +21,20 @@
             placeholder="Description"><br><br>
         <label for="price">Price</label><br><br>
         <input type="text" name="price" value="{{ $product['price'] }}" placeholder="Price"><br><br>
+
+        <label for="stock">Stock</label><br><br>
+        <input type="number" name="stock" value="{{ $product['stock'] }}" placeholder="Stock"><br><br>
+
+        <label for="category_id">Category</label><br><br>
+        <select name="category_id" id="category_id">
+            <option value="">Select Category</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select><br><br>
+
         <button type="submit">edit</button>
     </form>
 
