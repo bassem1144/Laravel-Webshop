@@ -52,7 +52,7 @@
                                 <p class="text-sm text-gray-600">Name: <span class="font-medium">{{ $order->user->name }}</span></p>
                                 <p class="text-sm text-gray-600">Email: <span class="font-medium">{{ $order->user->email }}</span></p>
                             @else
-                                <p class="text-sm text-gray-600 text-gray-500">[Customer information unavailable]</p>
+                                <p class="text-sm text-gray-600">[Customer information unavailable]</p>
                             @endif
 
                             <h4 class="text-md font-semibold mt-4 mb-2">Shipping Address</h4>
