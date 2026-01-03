@@ -4,10 +4,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Admin Dashboard') }}
             </h2>
-            <a href="{{ route('admin.products.create') }}"
-               class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
-                Add New Product
-            </a>
+            <div class="flex gap-2">
+                <a href="{{ route('admin.categories.index') }}"
+                   class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded">
+                    Manage Categories
+                </a>
+                <a href="{{ route('admin.products.create') }}"
+                   class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                    Add New Product
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -41,8 +47,8 @@
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
                                                     <img class="h-10 w-10 rounded object-cover"
-                                                         src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/40' }}"
-                                                         alt="{{ $product->name }}">
+                                                         src="{{ $product->image ? asset('storage/' . $product->image) : 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23f3f4f6\'/%3E%3C/svg%3E' }}"
+                                                         alt="">
                                                 </div>
                                                 <div class="ml-4">
                                                     <div class="text-sm font-medium text-gray-900">{{ $product->name }}</div>
