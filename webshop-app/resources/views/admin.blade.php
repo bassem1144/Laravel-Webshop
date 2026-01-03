@@ -14,10 +14,10 @@
     <div class="card-deck row ">
         @foreach ($products as $product)
             <div class="card" style="width:400px">
-                <img class="card-img-top" src="https://picsum.photos/200/150" alt="Product image">
+                <img class="card-img-top" src="https://picsum.photos/200/150">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $product['name'] }}</h4>
-                    <p class="card-text">{{ $product['description'] }}</p>
+                    <h4 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $product['name'] }}</h4>
+                    <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $product['description'] }}</p>
                     <div class="row">
                         <a href="/edit/{{ $product['id'] }}" class="btn btn-primary">Edit</a>
                         <form action="/delete/{{ $product['id'] }}" method="POST">
