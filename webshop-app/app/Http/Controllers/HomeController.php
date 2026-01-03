@@ -48,7 +48,7 @@ class HomeController extends Controller
             default => $query->orderBy('name', 'asc'),
         };
 
-        $products = $query->paginate(12)->withQueryString();
+        $products = $query->paginate(12);
         $categories = Category::withCount('products')->get();
 
         // Get current category for breadcrumbs
