@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -14,7 +13,7 @@ class OrderController extends Controller
      */
     public function index(): View
     {
-        $orders = auth()->user()
+        $orders = $this->user()
             ->orders()
             ->with('items.product')
             ->latest()
@@ -29,7 +28,7 @@ class OrderController extends Controller
     public function show(Order $order): View
     {
         // Ensure user owns this order or is admin
-        if ($order->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+        if ($order->user_id !== auth()->id() && !$this->user()->isAdmin()) {
             abort(403);
         }
 
